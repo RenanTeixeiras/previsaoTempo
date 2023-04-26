@@ -1,0 +1,103 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #58ede6;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 2rem 0;
+    font-weight: 500;
+}
+
+form {
+    margin-bottom: 2rem;
+}
+
+input[type="text"] {
+    border: 2px solid #333;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    width: 70%;
+    max-width: 300px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+
+.previsao-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.previsao {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 1rem;
+    padding: 1.5rem;
+    width: calc(33.333% - 2rem);
+    box-sizing: border-box;
+}
+
+@media (max-width: 992px) {
+    .previsao {
+        width: calc(50% - 2rem);
+    }
+}
+
+@media (max-width: 576px) {
+    .previsao {
+        width: calc(100% - 2rem);
+    }
+}
+
+.cidade {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.descricao {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+}
+
+.temperatura {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.error {
+    color: #d32f2f;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.success {
+    color: #388e3c;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
