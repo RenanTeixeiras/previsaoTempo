@@ -3,6 +3,7 @@ import json
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///previsao.db'
 app.config['SECRET_KEY'] = 'chavealeatoria'
@@ -28,20 +29,26 @@ def consultarCidade(cidade):
 def index_get():
     cidades = City.query.all()
     dados_previsao = []
+    dict_traducao = {
+        'scattered clouds':'Nuvens Esparsas',
+        'clear sky':'Ceu Limpo',
+        'broken clouds': 'Parcialmente Nublado'
+    }
     for cidade in cidades:
         resposta = consultarCidade(cidade.name)
         temperatura = {
             'cidade': cidade.name,
             'temperatura': resposta['main']['temp'],
-            'descrição' : resposta['weather'][0]['description']
+            'descrição' : dict_traducao[f"{resposta['weather'][0]['description']}"]
         }
         dados_previsao.append(temperatura)
+        
     return render_template('previsao.html', temperatura=temperatura, dados_previsao=dados_previsao)
 
 
 @app.route("/", methods=['POST'])
 def index_post():
-    nova_cidade = request.form.get('cidade')
+    nova_cidade = request.form.get('cidade').capitalize()
     err_msg = ''
     if nova_cidade:
         ja_existe = City.query.filter_by(name=nova_cidade).first()
@@ -51,6 +58,7 @@ def index_post():
             if consulta_nova_cidade['cod'] == 200:
                 db.session.add(City(name=nova_cidade))
                 db.session.commit()
+                
             else:
                 err_msg = 'Esta cidade não existe!'
         else:
